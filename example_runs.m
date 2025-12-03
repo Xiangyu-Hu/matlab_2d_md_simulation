@@ -134,7 +134,7 @@ function forces = calculate_forces_simple(positions, L, epsilon, sigma, r_cut)
             rij = rij - L * round(rij / L);
             r = sqrt(sum(rij.^2));
             
-            if r < r_cut && r > 0
+            if r < r_cut && r > 0  % r > 0 prevents division by zero
                 sr6 = (sigma / r)^6;
                 force_magnitude = 24 * epsilon / r * (2 * sr6^2 - sr6);
                 force_vector = force_magnitude * rij / r;
@@ -155,7 +155,7 @@ function PE = calculate_potential_simple(positions, L, epsilon, sigma, r_cut)
             rij = rij - L * round(rij / L);
             r = sqrt(sum(rij.^2));
             
-            if r < r_cut && r > 0
+            if r < r_cut && r > 0  % r > 0 prevents division by zero
                 sr6 = (sigma / r)^6;
                 PE = PE + 4 * epsilon * (sr6^2 - sr6);
             end

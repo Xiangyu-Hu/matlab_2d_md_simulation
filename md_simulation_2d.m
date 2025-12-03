@@ -8,7 +8,7 @@
 % Author: Unknown (Public Resource)
 % Modified for educational purposes
 
-clear all; close all; clc;
+clear; close all; clc;
 
 %% System Parameters
 N = 50;                    % Number of particles
@@ -201,7 +201,7 @@ function [PE, virial] = calculate_potential_energy(positions, L, epsilon, sigma,
             % Distance
             r = sqrt(sum(rij.^2));
             
-            % Only calculate if within cutoff
+            % Only calculate if within cutoff (r > 0 prevents division by zero)
             if r < r_cut && r > 0
                 % Lennard-Jones potential
                 % U = 4*epsilon*((sigma/r)^12 - (sigma/r)^6)

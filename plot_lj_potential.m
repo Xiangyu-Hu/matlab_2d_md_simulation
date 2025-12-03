@@ -4,7 +4,7 @@
 % This script plots the Lennard-Jones potential energy and force
 % as functions of particle separation distance
 
-close all; clear all; clc;
+close all; clear; clc;
 
 %% Parameters
 sigma = 1.0;      % Length scale
