@@ -36,10 +36,16 @@ bins=0:.02:min(particles.box_size/2)+1;
 %ones greater than half cannot
 safe=(xhistrdf<(min(particles.box_size)/2)) & xhistrdf~=0;
 
-%Adjust the RDF for the varying volume of the 3D
-%spherical shell
+%Adjust the RDF for 2D
+
 for k=2:length(xhistrdf)-1
-   yhistadjusted(k)= yhistrdf(k)./4*3/pi./((xhistrdf(k+1)+xhistrdf(k)).^3/8-((xhistrdf(k-1)+xhistrdf(k))).^3/8)./particles.density./particles.n;
+% Define outer and inner radii
+r_outer = (xhistrdf(k+1) + xhistrdf(k)) / 2;
+r_inner = (xhistrdf(k-1) + xhistrdf(k)) / 2;
+% Area of the annular ring: pi * (r_outer^2 - r_inner^2)
+area_ring = pi * (r_outer^2 - r_inner^2);
+% Normalize
+yhistadjusted(k) = yhistrdf(k) ./ area_ring ./ particles.density ./ particles.n;
 end
 
 xhistrdf=xhistrdf(safe);
